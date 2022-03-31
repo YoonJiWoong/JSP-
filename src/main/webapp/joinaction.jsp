@@ -6,6 +6,10 @@
 <jsp:useBean id="user" class="User.User" scope="page"/>
 <jsp:setProperty name="user" property="userID"/>
 <jsp:setProperty name="user" property="userPassword"/>
+<jsp:setProperty name="user" property="userName"/>
+<jsp:setProperty name="user" property="userGender"/>
+<jsp:setProperty name="user" property="userEmail"/>
+
 
 
 	
@@ -19,36 +23,34 @@
 </head>
 <body>
 	<%
-	UserDAO userDAO = new UserDAO();
-	int result = userDAO.login(user.getUserID(), user.getUserPassword());
-	if(result == 1){
+	
+	
+	if(user.getUserID()==null || user.getUserPassword()==null || user.getUserName()==null || user.getUserEmail()==null || user.getUserGender()==null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("loaction.href = 'main.jsp'");
-		script.println("</script>");
-	}else if(result == 0){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('비밀번호가 틀립니다')");
+		script.println("alert('모든 정보를 채워주세요')");
 		script.println("history.back()");
 		script.println("</script>");
+
+	}else{
+		UserDAO userDAO = new UserDAO();
+		int result = userDAO.join(user);
+		if(result == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 존재하는 아이디 입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}else{
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("loaction.href = 'main.jsp'");
+			script.println("</script>");
+		}
 		
-	}else if(result == -1){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('존재하지 않는 아이디 입니다.')");
-		script.println("history.back()");
-		script.println("</script>");
 		
-	}else if(result == -2){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('데이터 베이스 오류가 발생했습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
 	}
-	
-	
+
 	%>
 
 
