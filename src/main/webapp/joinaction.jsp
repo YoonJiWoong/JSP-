@@ -24,6 +24,11 @@
 <body>
 	<%
 	
+	String userID = null;
+	if(session.getAttribute("userID")!=null){
+		userID = (String) session.getAttribute("userID");
+	}
+	
 	
 	if(user.getUserID()==null || user.getUserPassword()==null || user.getUserName()==null || user.getUserEmail()==null || user.getUserGender()==null){
 		PrintWriter script = response.getWriter();
@@ -42,9 +47,10 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}else{
+			session.setAttribute("userID", user.getUserID());
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("loaction.href = 'main.jsp'");
+			script.println("location.href = 'main.jsp'");
 			script.println("</script>");
 		}
 		

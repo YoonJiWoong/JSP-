@@ -19,12 +19,21 @@
 </head>
 <body>
 	<%
+	
+	String userID = null;
+	if(session.getAttribute("userID")!=null){
+		userID = (String) session.getAttribute("userID");
+	}
+	
+	
+	
 	UserDAO userDAO = new UserDAO();
 	int result = userDAO.login(user.getUserID(), user.getUserPassword());
 	if(result == 1){
+		session.setAttribute("userID", user.getUserID());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("loaction.href = 'main.jsp'");
+		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}else if(result == 0){
 		PrintWriter script = response.getWriter();
