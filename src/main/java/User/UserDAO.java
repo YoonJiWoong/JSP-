@@ -31,7 +31,7 @@ public class UserDAO {
 		String SQL = "SELECT userPassword FROM USER WHERE userID=?";
 		
 		try {
-			System.out.println(SQL+" : ");
+			
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
