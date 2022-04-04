@@ -18,10 +18,10 @@ public class UserDAO {
 			String dbPassword = "root";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			System.out.println("db立加 己傍");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("db立加 角菩");
+			
 		}		
 	}
 	

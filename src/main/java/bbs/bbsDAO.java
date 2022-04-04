@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class bbsDAO {
 	
@@ -18,10 +19,10 @@ public class bbsDAO {
 			String dbPassword = "root";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			System.out.println("db접속 성공");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("db접속 실패");
+			
 		}		
 	}
 	
@@ -63,11 +64,6 @@ public class bbsDAO {
 
 	public int write(String bbsTitle, String userID, String bbsContent) { // 게시글 번호
 		
-		System.out.println("bbs타이틀 : "+bbsTitle);
-		System.out.println("bbs아이디 : "+userID);
-		System.out.println("bbs컨텐츠 : "+bbsContent);
-		
-		
 		String SQL = "insert into bbs values (?,?,?,?,?,?)"; // 내림차순해서 가장 아래 번호 가져옴
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
@@ -85,7 +81,96 @@ public class bbsDAO {
 		
 	}
 	
+	public ArrayList<bbs> getlist(int pageNumber) {
+		
+		
+		String SQL = "SELECT * FROM BBS WHERE bbsID < ? and bbsAvailabe = 1 ORDER BY bbsID DESC LIMIT 10;"; // 삭제안된(bbsAvailable = 1)거 10개까지..
+		ArrayList<bbs> list = new ArrayList<bbs>();
+		try {
+			PreparedStatement psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, getNext() - (pageNumber -1)*10);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				bbs bbs = new bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				list.add(bbs);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	
+		return list; 
+		
+	}
+	
+	
+	public boolean nextPage(int pageNumber) {
+		
+
+		
+		
+		String SQL = "SELECT * FROM BBS WHERE bbsID < ? and  bbsAvailabe = 1";
+		ArrayList<bbs> list = new ArrayList<bbs>();
+		try {
+			PreparedStatement psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, getNext() - (pageNumber -1)*10);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				
+				return true;
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	
+		
+		
+	}
+	
+	public bbs getbbs(int bbsID) {
+		
+		
+		
+		String SQL = "SELECT * FROM BBS WHERE bbsID=?";
+		
+		try {
+			PreparedStatement psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, bbsID);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				
+				bbs bbs = new bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				return bbs;
+				
+				
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+
+	}
 	
 	
 	
