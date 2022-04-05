@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>JSP 게시판 웹사이트</title>
 </head>
+
+
 <body>
 	
 	<%
@@ -29,7 +31,7 @@
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" id="nav"> 
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -87,8 +89,9 @@
 		<div class="container">
 			<div class="jumbotron">
 				<h1>JSP 게시판 소개</h1>
-				<p>본 게시판은 JSP로 만든 간단한 게시판입니다. 최소한의 간단한 로직만을 사용해서 개발했습니다.
-				디자인 템플릿으로는 부트스트랩을 사용했습니다.</p>
+				<p>본 게시판은 JSP로 만든 간단한 게시판입니다. 최소한의 간단한 로직만을 사용해서 개발했습니다.<br>
+				디자인 템플릿으로는 부트스트랩을 사용했습니다. 글을 작성하실려면 왼쪽 위의 접속하기 버튼을 클릭하셔서<br>
+				회원가입 후 로그인을 하셔서 게시판 메뉴로 들어가신 후 글 작성을 하시면 됩니다!</p>
 				
 			</div>
 			

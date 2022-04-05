@@ -127,7 +127,7 @@ a, a:hover {
 
 
 					</table>
-					<input type="submit" class="btn btn-primary pull-right" value="수정하기"></a>
+					<input onclick="return confirm('정말로 수정하시겠습니까?')" type="submit" class="btn btn-primary pull-right" value="수정하기"></a>
 				</form>
 			</div>
 		</div>

@@ -84,11 +84,14 @@ public class bbsDAO {
 	public ArrayList<bbs> getlist(int pageNumber) {
 		
 		
-		String SQL = "SELECT * FROM BBS WHERE bbsID < ? and bbsAvailabe = 1 ORDER BY bbsID DESC LIMIT 10;"; // 삭제안된(bbsAvailable = 1)거 10개까지..
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailabe = 1 ORDER BY bbsID DESC LIMIT 10 OFFSET ?"; // 삭제안된(bbsAvailable = 1)거 10개까지..
+		
+		
+		
 		ArrayList<bbs> list = new ArrayList<bbs>();
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
-			psmt.setInt(1, getNext() - (pageNumber -1)*10);
+			psmt.setInt(1, (pageNumber -1) * 10);
 			
 			rs = psmt.executeQuery();
 			
@@ -119,11 +122,11 @@ public class bbsDAO {
 
 		
 		
-		String SQL = "SELECT * FROM BBS WHERE bbsID < ? and  bbsAvailabe = 1";
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailabe = 1 ORDER BY bbsID DESC LIMIT 10 OFFSET ?";
 		ArrayList<bbs> list = new ArrayList<bbs>();
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
-			psmt.setInt(1, getNext() - (pageNumber -1)*10);
+			psmt.setInt(1, (pageNumber -1) * 10);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				
