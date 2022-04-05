@@ -172,9 +172,38 @@ public class bbsDAO {
 
 	}
 	
+	public int update(int bbsID, String bbsTitle, String bbsContent) {
+		
+		String SQL = "update bbs SET bbsTitle=?, bbsContent=? WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
+		try {
+			PreparedStatement psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, bbsTitle);
+			psmt.setString(2, bbsContent);
+			psmt.setInt(3, bbsID);			
+			return psmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return -1; // 데이터 베이스 오류	
+	}
 	
-	
+	public int delete(int bbsID) {
+		
+		
+		String SQL = "update bbs SET bbsAvailabe=0 WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
+		try {
+			PreparedStatement psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, bbsID);
+					
+			return psmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return -1; // 데이터 베이스 오류	
+	}
+		
+	}
 	
 	
 
-}
+

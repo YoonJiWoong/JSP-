@@ -84,6 +84,45 @@
 				%>
 			</div>
 		</nav>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>JSP 게시판 소개</h1>
+				<p>본 게시판은 JSP로 만든 간단한 게시판입니다. 최소한의 간단한 로직만을 사용해서 개발했습니다.
+				디자인 템플릿으로는 부트스트랩을 사용했습니다.</p>
+				
+			</div>
+			
+			<div class="container">
+				<div id="myCarousel" class="carousel slide" date-ride="Carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1" ></li>
+						<li data-target="#myCarousel" data-slide-to="2" ></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active">
+							<img src="images/1.jpg">
+						</div>
+						<div class="item">
+							<img src="images/2.jpg">
+						</div>
+						<div class="item">
+							<img src="images/3.jpg">
+						</div>				
+					</div>
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+					
+					</div>
+					
+					
+			</div>
+			
+
 
 </body>
 </html>
