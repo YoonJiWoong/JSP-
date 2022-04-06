@@ -53,7 +53,7 @@
 							name="userID" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="비빌번호"
+						<input type="password" class="form-control" placeholder="비빌번호"
 							name="userPassword" maxlength="20">
 					</div>
 					<div class="form-group">

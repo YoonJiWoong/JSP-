@@ -14,14 +14,15 @@ public class bbsDAO {
 	
 	public bbsDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS?characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-			String dbID = "root";
-			String dbPassword = "root";
+			String dbURL = "jdbc:mysql://localhost/jwyun416";
+			String dbID = "jwyun416";
+			String dbPassword = "qazx7852";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			
+			System.out.println("DB연결 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("DB연결 실패");
 			
 		}		
 	}
@@ -64,7 +65,7 @@ public class bbsDAO {
 
 	public int write(String bbsTitle, String userID, String bbsContent) { // 게시글 번호
 		
-		String SQL = "insert into bbs values (?,?,?,?,?,?)"; // 내림차순해서 가장 아래 번호 가져옴
+		String SQL = "insert into BBS values (?,?,?,?,?,?)"; // 내림차순해서 가장 아래 번호 가져옴
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
 			psmt.setInt(1, getNext());
@@ -177,7 +178,7 @@ public class bbsDAO {
 	
 	public int update(int bbsID, String bbsTitle, String bbsContent) {
 		
-		String SQL = "update bbs SET bbsTitle=?, bbsContent=? WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
+		String SQL = "update BBS SET bbsTitle=?, bbsContent=? WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
 			psmt.setString(1, bbsTitle);
@@ -193,7 +194,7 @@ public class bbsDAO {
 	public int delete(int bbsID) {
 		
 		
-		String SQL = "update bbs SET bbsAvailabe=0 WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
+		String SQL = "update BBS SET bbsAvailabe=0 WHERE bbsID=? "; // 내림차순해서 가장 아래 번호 가져옴
 		try {
 			PreparedStatement psmt = conn.prepareStatement(SQL);
 			psmt.setInt(1, bbsID);
